@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CSS3</title>
+<style>
+*{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+html, body{height: 100%;}
+.box{
+	width: 400px;
+	height: 400px;
+	position: relative;
+	background: #f0f0f0;
+	margin: 50px auto 0;
+	-webkit-transform-style: preserve-3d;
+	-webkit-perspective: 1500;
+}
+.cube{
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	margin-left: -100px;
+	margin-top: -100px;
+
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: rotateX(30deg) rotateY(30deg);
+	-webkit-animation: ani-cube 3s infinite linear;
+}
+@-webkit-keyframes ani-cube{
+	0%{
+		-webkit-transform: rotateX(0deg) rotateY(0deg);
+		
+	}
+	50%{
+		-webkit-transform: rotateX(160deg) rotateY(180deg);
+	}
+	100%{
+		-webkit-transform: rotateX(360deg) rotateY(360deg);
+	}
+}
+.cube li{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-radius: 10px;
+	-webkit-transform-style: preserve-3d;
+	
+}
+.poster0{
+	-webkit-transform: rotateX(0deg) translateZ(100px);
+	background: rgba(12, 20, 30, .3);
+}
+.poster1{
+	-webkit-transform: rotateX(90deg) translateZ(100px);
+	background: rgba(11, 20, 210, .5);
+}
+.poster2{
+	-webkit-transform: rotateX(180deg) translateZ(100px);
+	background: rgba(1, 80, 230, .5);
+}
+.poster3{
+	-webkit-transform: rotateX(270deg) translateZ(100px);
+	background: rgba(1, 220, 80, .5);
+}
+.poster4{
+	-webkit-transform: rotateY(90deg) translateZ(100px);
+	background: rgba(81, 220, 230, .5);
+}
+.poster5{
+	-webkit-transform: rotateY(270deg) translateZ(100px);
+	background: rgba(221, 60, 60, .5);
+}
+</style>
+</head>
+
+<body>
+
+<section class="box">
+	<ul class="cube">
+    	<li class="poster0">
+        <li class="poster1">
+        <li class="poster2">
+        <li class="poster3">
+        <li class="poster4">
+        <li class="poster5">
+    </ul>
+</section>
+
+</body>
+</html>
