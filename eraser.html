@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<head>
+    <title>test</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+</head>
+<style>
+    .hide{
+        display: none;
+    }
+    html, body{padding: 0;margin: 0;}
+    h1{line-height: 40px;margin: 20px 0 0;}
+
+
+
+    #box{
+        position: absolute;
+        width: 320px;
+        height: 250px;
+        line-height: 250px;
+        text-align: center;
+        font-size: 30px;
+        color: olivedrab;
+    }
+    .canvas{
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: thin solid #aaa;
+        cursor: crosshair;
+        padding: 0;
+    }
+</style>
+<h1>思密达</h1>
+
+
+<div id="box">
+    <span id="text">思密达</span>
+    <canvas class="canvas" width="320" height="250" id="canvas"></canvas>
+</div>
+
+
+<script>
+
+    var demoPic = document.getElementById('demo-pic');
+
+    var canvas = document.getElementById('canvas'),
+            ct = canvas.getContext('2d');
+
+    //drawFiveRings();
+    //drawFiveRings2();
+
+
+    // 开始涂抹操作 - 思密达
+
+    var desArr = [
+            '思密达',
+            '老美了',
+            '求上进',
+            '萝莉控',
+            '哪见过哪见过哪见过哪过'
+    ];
+
+    // font-style, font-variant, font-weight, font-size, line-height, font-family
+
+    if(canvas.addEventListener){
+        canvas.addEventListener('touchstart', function(e){
+            var x = e.touches[0].pageX,
+                    y = e.touches[0].pageY,
+                    posi;
+
+            posi = canvasPosi(canvas, x, y);
+            eraser(posi.x, posi.y);
+
+        }, false);
+
+        canvas.addEventListener('touchmove', function(e){
+            var x = e.touches[0].pageX,
+                    y = e.touches[0].pageY,
+                    posi;
+            posi = canvasPosi(canvas, x, y);
+            eraser(posi.x, posi.y);
+        })
+
+        canvas.addEventListener('touchend', function(e){
+        }, false);
+    }
+    fillDivision();
+
+    function eraser(x, y){
+        ct.save();
+        ct.beginPath();
+        ct.arc(x, y, 20, 0, Math.PI*2);
+        ct.clip();
+        ct.fill();
+        ct.clearRect(0, 0, canvas.width, canvas.height);
+        ct.closePath();
+        ct.restore();
+    }
+
+    function canvasPosi(canvas, x, y){
+        var box = canvas.getBoundingClientRect();
+        return {
+            x: x - box.left * (canvas.width / box.width),
+            y: y - box.top * (canvas.height / box.height)
+        }
+    }
+
+    function fillText(){
+        ct.save();
+        ct.beginPath();
+        ct.font = '20px Microsoft Yahei';
+        ct.fillStyle = '#f00';
+        ct.textAlign = 'center';
+        ct.textBaseline = 'middle';
+        ct.fillText(desArr[randomMax(5)-1], canvas.width/2, canvas.height/2);
+        ct.restore();
+    }
+
+    function fillDivision(){
+        ct.save();
+        ct.beginPath();
+        ct.fillStyle = '#ECE6A7';
+        ct.fillRect(0, 0, canvas.width, canvas.height);
+        ct.restore();
+    }
+
+    function randomMax(n){
+        if(!n) return ;
+        return Math.floor(Math.random() * n + 1);
+    }
+
+
+
+</script>
+
